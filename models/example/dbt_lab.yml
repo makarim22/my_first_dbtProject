@@ -1,0 +1,64 @@
+
+version: 2
+
+sources:
+  - name: dbt_lab
+    tables:
+      - name: raw_bank
+        columns:
+          - name: age
+            tests:
+              - not_null
+          - name: job
+            tests:
+              - accepted_values:
+                  values: ["admin.", "blue-collar", "entrepreneur", "housemaid", "management", "retired", "self-employed", "services", "student", "technician", "unemployed", "unknown"]
+          - name: marital
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ["divorced", "married", "single", "unknown"]
+          - name: default
+            tests:
+              - not_null
+          - name: balance
+            tests:
+              - not_null
+          - name: housing
+            tests:
+              - not_null
+          - name: loan
+            tests:
+              - not_null
+          - name: contact
+            tests:
+              - accepted_values:
+                  values: ["cellular", "telephone", "unknown"]
+          - name: day
+            tests:
+              - not_null
+          - name: month
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+          - name: education
+            tests:
+              - accepted_values:
+                  values: ["secondary", "primary", "tertiary", "unknown"]
+          - name: duration
+            tests:
+              - not_null
+          - name: campaign
+            tests:
+              - not_null
+          - name: pdays
+            tests:
+              - not_null
+          - name: previous
+            tests:
+              - not_null
+          - name: poutcome
+          - name: deposit
+            tests:
+              - not_null

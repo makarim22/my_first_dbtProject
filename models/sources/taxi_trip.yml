@@ -1,0 +1,49 @@
+version: 2
+
+sources:
+  - name: taxi_tripdata
+    description: masih merupakan data mentah yang dimasukkan as is dari file sumber
+    tables:
+      - name: taxi_tripdata_v2
+        description: tabel utama
+        columns:
+          - name: VendorID
+            description: A code indicating the TPEP provider that provided the record. 1= Creative Mobile Technologies,  2= VeriFone Inc.
+            tests:
+             - accepted_values:
+                values: [1, 2]
+          - name: tpep_pickup_datetime
+            description: The date and time when the meter was engaged.
+          - name: tpep_dropoff_datetime
+            description: The date and time when the meter was disengaged. 
+          - name: Passenger_count
+            description: The number of passengers in the vehicle. This is a driver-entered value.
+          - name: Trip_distance
+          - name: PULocationID
+          - name: DOLocationID
+          - name: RateCodeID
+            description : The final rate code in effect at the end of the trip.
+            tests:
+             - accepted_values:
+                values: [1, 2, 3, 4, 5, 6]
+          - name: Store_and_fwd_flag
+            tests:
+             - accepted_values:
+                values: ['Y', 'N']
+          - name: Payment_type
+            description : A numeric code signifying how the passenger paid for the trip. 1= Credit card, 2= Cash, 3= No charge, 4= Dispute, 5= Unknown, 6= Voided trip
+            tests:
+             - accepted_values:
+                values: [1, 2, 3, 4, 5, 6]
+          - name: Fare_amount
+          - name: Extra 
+          - name: MTA_tax
+          - name: Tip_amount
+          - name: Tolls_amount
+          - name: Total_amount 
+          - name: Congestion_Surcharge
+          - name: Trip_type
+            tests:
+             - accepted_values:
+                values: [1, 2]
+     

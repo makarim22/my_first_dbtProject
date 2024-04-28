@@ -1,0 +1,8 @@
+version : 2
+
+models: # or seeds:
+  - name : bikeshare_active_stations
+    tests:
+      - dbt_expectations.expect_table_columns_to_not_contain_set:
+          column_list: ["status"]
+          transform: upper # (Optional)
