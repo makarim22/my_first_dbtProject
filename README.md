@@ -95,17 +95,17 @@ adapun rumus macros yang membentuk total fare by payment_type adalah:
  {% endmacro %}
 
     
-    6. melakukan generic test dan singular test
+   6. melakukan generic test dan singular test
     
-    generic test dilakukan dengan memberikan argumen/parameter pada masing-masing kolom yang dimaksud. ada 4 tipe generic test : unique, non-null, accepted_values, dan 
-    relationships. karena dataset ini tidak memiliki primary key maka generic test unique tidak dilakukan. dengan mengacu metadata, dilakukan generic test berupa accepted 
-    values pada beberapa kolom sebagai contoh kolom payment_type:
+   generic test dilakukan dengan memberikan argumen/parameter pada masing-masing kolom yang dimaksud. ada 4 tipe generic test : unique, non-null, accepted_values, dan 
+   relationships. karena dataset ini tidak memiliki primary key maka generic test unique tidak dilakukan. dengan mengacu metadata, dilakukan generic test berupa accepted 
+   values pada beberapa kolom sebagai contoh kolom payment_type:
   
    <img width="479" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/5b570b36-8fa1-41b3-b97b-db39cf8faeb1">
 
 
     
-    dilakukan konfigurasi sebagai berikut :
+   dilakukan konfigurasi sebagai berikut :
 
    <img width="607" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/fe04ce6e-81cf-48eb-80c0-c2cfba685bdf">
 
@@ -128,6 +128,8 @@ adapun rumus macros yang membentuk total fare by payment_type adalah:
    *,  -- Select all existing columns
    ROUND(total_amount * 16241.5, 2) AS total_amount_idr  -- Add converted amount with rounding
    FROM {{ source("dbt_lab", "taxi_tripdata") }}
+   hasil model :
+   ![image](https://github.com/makarim22/my_first_dbtProject/assets/97607349/56e5ec1f-29bb-4cdf-95de-1823eb898944)
 
    catatan : semua model dibentuk dalam tampilan view, tiap model dilakukan run sqlfmt 
  
