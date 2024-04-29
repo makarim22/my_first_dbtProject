@@ -93,9 +93,9 @@ adapun rumus macros yang membentuk total fare by payment_type adalah:
         sum(fare_amount + tip_amount + tolls_amount + extra + mta_tax) as total_fare
     from {{ source("dbt_lab", "taxi_tripdata") }}
     group by payment_type
-
-
 {% endmacro %}
+
+    
     6. melakukan generic test dan singular test
     - generic test dilakukan dengan memberikan argumen/parameter pada masing-masing kolom yang dimaksud. ada 4 tipe generic test : unique, non-null, accepted_values, dan 
     relationships. karena dataset ini tidak memiliki primary key maka generic test unique tidak dilakukan. dengan mengacu metadata, dilakukan generic test berupa accepted 
