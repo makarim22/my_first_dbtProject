@@ -83,6 +83,8 @@ ORDER BY
   1
   dengan hasil sebagai berikut :
 <img width="412" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/b92a88a6-6da9-4665-ae36-5b9b126ab598">
+
+
 adapun rumus macros yang membentuk total fare by payment_type adalah:
 {% macro total_fare_by_payment(taxi_tripdata) %}
 
