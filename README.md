@@ -40,24 +40,28 @@ sources:
    - avg speed :
      query :
      SELECT
-  EXTRACT(HOUR
-  FROM
-    lpep_pickup_datetime) hour,
-  ROUND(AVG(trip_distance / TIMESTAMP_DIFF(lpep_dropoff_datetime,
-        lpep_pickup_datetime,
-        SECOND))*3600, 1) speed
-FROM
-  {{ source("dbt_lab", "taxi_tripdata") }}
-WHERE
-  trip_distance > 0
-  AND fare_amount/trip_distance BETWEEN 2
-  AND 10
-  AND lpep_dropoff_datetime > lpep_pickup_datetime
-GROUP BY
-  1
-ORDER BY
-  1 
-     ![image](https://github.com/makarim22/my_first_dbtProject/assets/97607349/1a2d7f4e-6656-4fc9-8033-2b5b591440cd)
+      EXTRACT(HOUR
+     FROM
+      lpep_pickup_datetime) hour,
+      ROUND(AVG(trip_distance / TIMESTAMP_DIFF(lpep_dropoff_datetime,
+      lpep_pickup_datetime,
+      SECOND))*3600, 1) speed
+     FROM
+       {{ source("dbt_lab", "taxi_tripdata") }}
+     WHERE
+      trip_distance > 0
+      AND fare_amount/trip_distance BETWEEN 2
+      AND 10
+      AND lpep_dropoff_datetime > lpep_pickup_datetime
+    GROUP BY
+     1
+    ORDER BY
+     1 
+
+
+      ![image](https://github.com/makarim22/my_first_dbtProject/assets/97607349/1a2d7f4e-6656-4fc9-8033-2b5b591440cd)
+
+     
 
    - total_charge :
    - total fare by payment_type (menggunakan macros)
@@ -91,27 +95,41 @@ adapun rumus macros yang membentuk total fare by payment_type adalah:
 
 
 {% endmacro %}
-6. melakukan generic test dan singular test
-- generic test dilakukan dengan memberikan argumen/parameter pada masing-masing kolom yang dimaksud. ada 4 tipe generic test : unique, non-null, accepted_values, dan relationships. karena dataset ini tidak memiliki primary key maka generic test unique tidak dilakukan. dengan mengacu metadata, dilakukan generic test berupa accepted values pada beberapa kolom sebagai contoh kolom payment_type:
-<img width="479" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/5b570b36-8fa1-41b3-b97b-db39cf8faeb1">
-dilakukan konfigurasi sebagai berikut :
-<img width="607" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/fe04ce6e-81cf-48eb-80c0-c2cfba685bdf">
--  singular test merupakan tes custom pada beberapa kolom. caranya adalah dengan membuat model baru (.sql) dan memanggil command dbt test --select <nama file>
-contoh query :
--- Test name: test_fare_amount_positive
+    6. melakukan generic test dan singular test
+    - generic test dilakukan dengan memberikan argumen/parameter pada masing-masing kolom yang dimaksud. ada 4 tipe generic test : unique, non-null, accepted_values, dan 
+    relationships. karena dataset ini tidak memiliki primary key maka generic test unique tidak dilakukan. dengan mengacu metadata, dilakukan generic test berupa accepted 
+    values pada beberapa kolom sebagai contoh kolom payment_type:
+  
+    <img width="479" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/5b570b36-8fa1-41b3-b97b-db39cf8faeb1">
 
-SELECT 
- COUNT(*) AS invalid_rows,
- CASE WHEN fare_amount < 0 THEN 'Invalid: Negative fare amount' ELSE NULL END AS assertion_result
-FROM {{source('taxi_trip',"taxi_tripdata")}}
-group by assertion_result
+
+    
+    dilakukan konfigurasi sebagai berikut :
+
+
+    
+    
+    <img width="607" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/fe04ce6e-81cf-48eb-80c0-c2cfba685bdf">
+
+
+
+   
+   -  singular test merupakan tes custom pada beberapa kolom. caranya adalah dengan membuat model baru (.sql) dan memanggil command dbt test --select <nama file>
+   contoh query :
+   -- Test name: test_fare_amount_positive
+
+   SELECT 
+   COUNT(*) AS invalid_rows,
+   CASE WHEN fare_amount < 0 THEN 'Invalid: Negative fare amount' ELSE NULL END AS assertion_result
+   FROM {{source('taxi_trip',"taxi_tripdata")}}
+   group by assertion_result
 7. melakukan insert kolom baru berupa jumlah dalam rupiah dengan membuat model berikut :
-SELECT
-  *,  -- Select all existing columns
-  ROUND(total_amount * 16241.5, 2) AS total_amount_idr  -- Add converted amount with rounding
-FROM {{ source("dbt_lab", "taxi_tripdata") }}
+   SELECT
+   *,  -- Select all existing columns
+   ROUND(total_amount * 16241.5, 2) AS total_amount_idr  -- Add converted amount with rounding
+   FROM {{ source("dbt_lab", "taxi_tripdata") }}
 
-catatan : semua model dibentuk dalam tampilan view, tiap model dilakukan run sqlfmt 
+   catatan : semua model dibentuk dalam tampilan view, tiap model dilakukan run sqlfmt 
  
 
 
