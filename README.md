@@ -34,8 +34,16 @@ sources:
 
 4. buat model sql sebagaimana pada soal yaitu :
    - monthly passenger :
+     ![image](https://github.com/makarim22/my_first_dbtProject/assets/97607349/9a2eccbc-5347-4706-9bd0-dcaef79b9138)
+
    - monthly transaction per payment type :
-   - monthly trip distance per rate code
+  
+     ![image](https://github.com/makarim22/my_first_dbtProject/assets/97607349/624aceb0-1ff8-4fe7-9766-b0e7c9ad56de)
+
+   - monthly trip distance per rate code :
+
+     ![image](https://github.com/makarim22/my_first_dbtProject/assets/97607349/9162f195-9605-4a77-a4e8-51f142141a5e)
+
   
 5. menambahkan 2 model lainnya yaitu :
    - avg speed :
