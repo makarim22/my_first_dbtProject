@@ -86,18 +86,18 @@ ORDER BY
 
 
 adapun rumus macros yang membentuk total fare by payment_type adalah:
-{% macro total_fare_by_payment(taxi_tripdata) %}
-
+ {% macro total_fare_by_payment(taxi_tripdata) %}
     select
         payment_type,
         sum(fare_amount + tip_amount + tolls_amount + extra + mta_tax) as total_fare
     from {{ source("dbt_lab", "taxi_tripdata") }}
     group by payment_type
-{% endmacro %}
+ {% endmacro %}
 
     
     6. melakukan generic test dan singular test
-    - generic test dilakukan dengan memberikan argumen/parameter pada masing-masing kolom yang dimaksud. ada 4 tipe generic test : unique, non-null, accepted_values, dan 
+    
+    generic test dilakukan dengan memberikan argumen/parameter pada masing-masing kolom yang dimaksud. ada 4 tipe generic test : unique, non-null, accepted_values, dan 
     relationships. karena dataset ini tidak memiliki primary key maka generic test unique tidak dilakukan. dengan mengacu metadata, dilakukan generic test berupa accepted 
     values pada beberapa kolom sebagai contoh kolom payment_type:
   
@@ -112,7 +112,7 @@ adapun rumus macros yang membentuk total fare by payment_type adalah:
 
 
    
-   -  singular test merupakan tes custom pada beberapa kolom. caranya adalah dengan membuat model baru (.sql) dan memanggil command dbt test --select <nama file>
+   singular test merupakan tes custom pada beberapa kolom. caranya adalah dengan membuat model baru (.sql) dan memanggil command dbt test --select <nama file>
    contoh query :
    -- Test name: test_fare_amount_positive
 
@@ -121,7 +121,9 @@ adapun rumus macros yang membentuk total fare by payment_type adalah:
    CASE WHEN fare_amount < 0 THEN 'Invalid: Negative fare amount' ELSE NULL END AS assertion_result
    FROM {{source('taxi_trip',"taxi_tripdata")}}
    group by assertion_result
-7. melakukan insert kolom baru berupa jumlah dalam rupiah dengan membuat model berikut :
+   
+   7. melakukan insert kolom baru berupa jumlah dalam rupiah dengan membuat model berikut :
+
    SELECT
    *,  -- Select all existing columns
    ROUND(total_amount * 16241.5, 2) AS total_amount_idr  -- Add converted amount with rounding
