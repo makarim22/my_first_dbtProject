@@ -4,9 +4,10 @@ Alur pengerjaan:
 1. masukkan file csv ke folder dbt seed lalu jalankan dbt seeds
 2. tabel akan otomatis digenerate pada database bigquery yang terhubung dengan dbt project.
    preview tabel raw :
+
    <img width="953" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/9ffe280f-b5f3-4b0b-9a01-6b6031c0569a">
 
-3. define tabel tersebut pada dbt project sehingga dapat direfer pada eksekusi model selanjutnya. caranya dadalah dengan menggunakan template sebagai berikut dengan menyesuaikannya dengan tabel bersangkutan.
+4. define tabel tersebut pada dbt project sehingga dapat direfer pada eksekusi model selanjutnya. caranya dadalah dengan menggunakan template sebagai berikut dengan menyesuaikannya dengan tabel bersangkutan.
    version: 2
 
 sources:
@@ -58,11 +59,9 @@ sources:
     ORDER BY
      1 
 
-
-      ![image](https://github.com/makarim22/my_first_dbtProject/assets/97607349/1a2d7f4e-6656-4fc9-8033-2b5b591440cd)
+    ![image](https://github.com/makarim22/my_first_dbtProject/assets/97607349/1a2d7f4e-6656-4fc9-8033-2b5b591440cd)
 
      
-
    - total_charge :
    - total fare by payment_type (menggunakan macros)
      contoh query total_charge:
@@ -100,16 +99,13 @@ adapun rumus macros yang membentuk total fare by payment_type adalah:
     relationships. karena dataset ini tidak memiliki primary key maka generic test unique tidak dilakukan. dengan mengacu metadata, dilakukan generic test berupa accepted 
     values pada beberapa kolom sebagai contoh kolom payment_type:
   
-    <img width="479" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/5b570b36-8fa1-41b3-b97b-db39cf8faeb1">
+   <img width="479" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/5b570b36-8fa1-41b3-b97b-db39cf8faeb1">
 
 
     
     dilakukan konfigurasi sebagai berikut :
 
-
-    
-    
-    <img width="607" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/fe04ce6e-81cf-48eb-80c0-c2cfba685bdf">
+   <img width="607" alt="image" src="https://github.com/makarim22/my_first_dbtProject/assets/97607349/fe04ce6e-81cf-48eb-80c0-c2cfba685bdf">
 
 
 
